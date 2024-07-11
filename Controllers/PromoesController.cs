@@ -48,7 +48,7 @@ namespace JM_Ejercicio_2_Tablas.Controllers
         // GET: Promoes/Create
         public IActionResult Create()
         {
-            ViewData["BurgerId"] = new SelectList(_context.Burger, "BurgerID", "BurgerID");
+            ViewData["BurgerName"] = new SelectList(_context.Burger, "Name", "Name");
             return View();
         }
 
@@ -57,15 +57,21 @@ namespace JM_Ejercicio_2_Tablas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PromoId,Descripcion,Fecha,BurgerId")] Promo promo)
+        public async Task<IActionResult> Create([Bind("PromoID,Descripcion,Fecha,BurgerName")] Promo promo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(promo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var burger = _context.Burger.FirstOrDefault(b => b.Name == promo.BurgerName);
+                if (burger != null)
+                {
+                    promo.BurgerId = burger.BurgerID;
+                    _context.Add(promo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ModelState.AddModelError("BurgerName", "Invalid Burger Name");
             }
-            ViewData["BurgerId"] = new SelectList(_context.Burger, "BurgerID", "BurgerID", promo.BurgerId);
+            ViewData["BurgerName"] = new SelectList(_context.Burger, "Name", "Name", promo.BurgerName);
             return View(promo);
         }
 

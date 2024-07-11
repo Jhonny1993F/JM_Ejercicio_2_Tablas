@@ -1,4 +1,6 @@
-﻿namespace JM_Ejercicio_2_Tablas.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace JM_Ejercicio_2_Tablas.Models
 {
     public class Promo
     {
@@ -8,6 +10,9 @@
 
         public int BurgerId { get; set; }
         public Burger? Burger { get; set; }
+
+        [NotMapped]
+        public string? BurgerName { get; set; }
 
     }
 }

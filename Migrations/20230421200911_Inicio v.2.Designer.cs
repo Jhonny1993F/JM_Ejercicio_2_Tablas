@@ -4,6 +4,7 @@ using JM_Ejercicio_2_Tablas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JM_Ejercicio_2_Tablas.Migrations
 {
     [DbContext(typeof(JM_Ejercicio_2_TablasContext))]
-    partial class JM_Ejercicio_2_TablasContextModelSnapshot : ModelSnapshot
+    [Migration("20230421200911_Inicio v.2")]
+    partial class Iniciov2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
